@@ -9,6 +9,11 @@ RUN ["mvn", "verify"]
 ADD src /usr/micro-api-countries/src
 RUN ["mvn", "package"]
 
-EXPOSE 3000
+ENV MICRO_DB_COUNTRY_HOSTANME="localhost"
+ENV MICRO_DB_COUNTRY_USER="user"
+ENV MICRO_DB_COUNTRY_PASSWORD="password"
+ENV MICRO_DB_COUNTRY_DATABASE="database"
 
-CMD ["/usr/bin/java", "-jar", "target/micro-api-countries-final.jar"]
+EXPOSE 4567
+
+CMD ["/usr/bin/java", "-jar", "target/microservice-jar-with-dependencies.jar"]

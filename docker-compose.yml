@@ -1,0 +1,23 @@
+version: "2"
+services:
+  microservice:
+    image: micro_api_countries
+    build:
+      context: micro-api-countries/
+    container_name: minion_api_countries
+    environment:
+      MICRO_DB_COUNTRY_HOSTANME: repository
+      MICRO_DB_COUNTRY_USER: root
+      MICRO_DB_COUNTRY_PASSWORD: 123456
+      MICRO_DB_COUNTRY_DATABASE: country_db
+    links:
+      - repository
+    ports:
+      - 3000:4567
+  repository:
+    image: micro_db_countries
+    build:
+      context: micro-db-countries/
+    container_name: minion_db_countries
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456

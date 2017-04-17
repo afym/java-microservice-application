@@ -1,5 +1,7 @@
-FROM postgres:9.6.2-alpine
+FROM mysql:5.6
 
-WORKDIR /usr/micro-database-countries
+ADD data/database.sql /docker-entrypoint-initdb.d/database.sql
 
-ADD database.sql /usr/micro-database-countries/database.sql
+EXPOSE 3306
+
+CMD ["mysqld"]
