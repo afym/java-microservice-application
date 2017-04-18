@@ -16,7 +16,17 @@ public class GetCountry implements GetCountryService {
     }
 
     @Override
-    public List<Country> getAll(String order, String by) {
+    public List<Country> getAll() {
         return this.dataCountry.findAll();
+    }
+
+    @Override
+    public Country getCities(int countryId) {
+        return this.dataCountry.findAllCitiesById(countryId);
+    }
+
+    @Override
+    public Country getPopulations(int countryId) {
+        return this.dataCountry.findAllPopulationById(countryId);
     }
 }

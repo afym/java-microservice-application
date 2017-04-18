@@ -1,12 +1,21 @@
 package com.afym.model;
 
 public class City {
+    private int id;
     private String name;
     private float latitude;
     private float longitude;
 
     public City(String name){
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

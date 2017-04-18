@@ -18,7 +18,9 @@ docker run --name micro_api_countries -p 3000:4567 -d micro_api_countries
 ### Test the functions
 
 * curl localhost/
-* curl localhost/v1/countries?order=asc&by=name
+* curl localhost/v1/countries
+* curl /v1/countries/:countryId/cities
+* /v1/countries/:countryId/populations
 
 #### IntelliJ tip to compile
 

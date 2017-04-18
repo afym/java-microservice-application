@@ -16,7 +16,7 @@ public class DataConnector {
     }
 
     private void buildConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         this.connection = DriverManager.getConnection(this.database, this.user, this.password);
     }
 

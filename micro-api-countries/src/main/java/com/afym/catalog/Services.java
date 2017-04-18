@@ -8,6 +8,8 @@ public class Services {
         List<String> services = new ArrayList<String>();
         services.add("/");
         services.add("/v1/countries");
+        services.add("/v1/countries/:countryId/cities");
+        services.add("/v1/countries/:countryId/populations");
         return  services;
     }
 }
