@@ -5,7 +5,6 @@ import com.afym.application.RestResponse;
 import com.afym.catalog.Services;
 import com.afym.model.Country;
 import com.google.gson.Gson;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

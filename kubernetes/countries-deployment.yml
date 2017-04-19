@@ -1,0 +1,53 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: countries-deployment
+spec:
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: countries-application
+        version: v1
+    spec:
+      imagePullSecrets:
+        - name: aws-ecr
+      containers:
+      - name: api
+        env:
+          - name: MICRO_DB_COUNTRY_HOSTANME
+            valueFrom:
+             secretKeyRef:
+              name: mini-db-country-secret
+              key: host
+          - name: MICRO_DB_COUNTRY_DATABASE
+            valueFrom:
+             secretKeyRef:
+              name: mini-db-country-secret
+              key: database
+          - name: MICRO_DB_COUNTRY_USER
+            valueFrom:
+             secretKeyRef:
+              name: mini-db-country-secret
+              key: username
+          - name: MICRO_DB_COUNTRY_PASSWORD
+            valueFrom:
+             secretKeyRef:
+              name: mini-db-country-secret
+              key: password
+        image: <account-id>.dkr.ecr.<region>.amazonaws.com/micro_api_countries
+        ports:
+        - name: api-port
+          containerPort: 4567
+      - name: db
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+             secretKeyRef:
+              name: mini-db-country-secret
+              key: password
+        image: <account-id>.dkr.ecr.<region>.amazonaws.com/micro_db_countries
+        ports:
+        - name: db-port
+          containerPort: 3306
