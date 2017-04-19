@@ -47,9 +47,9 @@ $ docker push <ecr>.amazonaws.com/micro_db_countries:latest
 
 Launching the kubectl commands :
 
-* Replace the <account-id> in countries-deployment.yml with the correct value (example : 77531646)
-* Replace the <region> in countries-deployment.yml with the correct valye (example : us-west-2)
-* Replace the <docker-auth-base64> in aws-ecr-credentials.yml with the correct value (example : )
+* Replace the **account-id** in countries-deployment.yml with the correct value (example : 77531646)
+* Replace the **region** in countries-deployment.yml with the correct valye (example : us-west-2)
+* Replace the **docker-auth-base64** in aws-ecr-credentials.yml with the correct value (example : )
 
 ```
 # creating the base64 for the aws-ecr-credentials.yml
