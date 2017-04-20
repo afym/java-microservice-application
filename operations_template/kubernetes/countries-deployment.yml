@@ -36,10 +36,16 @@ spec:
              secretKeyRef:
               name: mini-db-country-secret
               key: password
-        image: <account-id>.dkr.ecr.<region>.amazonaws.com/micro_api_countries
+        image: {{account-id}}.dkr.ecr.{{region}}.amazonaws.com/micro_api_countries
         ports:
         - name: api-port
           containerPort: 4567
+        livenessProbe:
+          httpGet:
+            path: /v1/health-check
+            port: api-port
+          initialDelaySeconds: 15
+          timeoutSeconds: 30
       - name: db
         env:
           - name: MYSQL_ROOT_PASSWORD
@@ -47,7 +53,7 @@ spec:
              secretKeyRef:
               name: mini-db-country-secret
               key: password
-        image: <account-id>.dkr.ecr.<region>.amazonaws.com/micro_db_countries
+        image: {{account-id}}.dkr.ecr.{{region}}.amazonaws.com/micro_db_countries
         ports:
         - name: db-port
           containerPort: 3306

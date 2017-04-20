@@ -3,6 +3,7 @@ package com.afym;
 import com.afym.application.GetCountry;
 import com.afym.application.RestResponse;
 import com.afym.catalog.Services;
+import com.afym.infraestructure.DataConnector;
 import com.afym.model.Country;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class EntryPoint {
         });
 
         get("/v1/countries", (request, response) -> {
-            System.out.print("::::::::::::::: inside :::::::::::::::");
             response.type("application/json");
             Gson gson = new Gson();
             RestResponse<Country> restResponse = new RestResponse<Country>();
@@ -71,6 +71,23 @@ public class EntryPoint {
                 restResponse.setMessage(exception.getMessage());
                 restResponse.setError(true);
                 restResponse.setData(null);
+            }
+
+            return gson.toJson(restResponse);
+        });
+
+        get("/v1/health-check", (request, response) ->{
+            response.type("application/json");
+            Gson gson = new Gson();
+            RestResponse<String> restResponse = new RestResponse<String>();
+            restResponse.setMessage("applications is correct");
+
+            try {
+                DataConnector dataConnector = new DataConnector();
+                dataConnector.getConnection();
+            } catch (Exception e){
+                response.status(500);
+                restResponse.setMessage("applications is failing");
             }
 
             return gson.toJson(restResponse);

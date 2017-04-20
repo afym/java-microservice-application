@@ -45,11 +45,17 @@ $ docker tag micro_db_countries:latest <ecr>.amazonaws.com/micro_db_countries:la
 $ docker push <ecr>.amazonaws.com/micro_db_countries:latest
 ```
 
-Launching the kubectl commands :
+Variables :
 
-* Replace the **account-id** in countries-deployment.yml with the correct value (example : 77531646)
-* Replace the **region** in countries-deployment.yml with the correct valye (example : us-west-2)
-* Replace the **docker-auth-base64** in aws-ecr-credentials.yml with the correct value (example : )
+* Replace the **{{account-id}}**
+* Replace the **{{region}}**
+* Replace the **{{docker-auth-base64}}**
+
+Running the build.sh to generate the yml files :
+
+```
+$ ./build.sh 71727277 us-west-2 ehAi82...9= a27b2d....8db
+```
 
 ```
 # creating the base64 for the aws-ecr-credentials.yml
@@ -79,4 +85,12 @@ $ curl http://<your-elb>.us-west-2.elb.amazonaws.com/
 $ curl http://<your-elb>.us-west-2.elb.amazonaws.com/v1/countries
 $ curl http://<your-elb>.us-west-2.elb.amazonaws.com/v1/countries/1/cities
 $ curl http://<your-elb>.us-west-2.elb.amazonaws.com/v1/countries/1/populations
+```
+
+#### Jmeter stress test (optional):
+
+Replace the **{{elb}} and {{region}}** (manually in the operations/jmeter.test/micro-api-country.jmx)
+
+```
+jmeter -n -t operations/jmeter.test/micro-api-country.jmx
 ```
