@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: state-deployment
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: state-application
+        version: v1
+    spec:
+      containers:
+      - name: state
+        env:
+          - name: CLUSTER_VOLUME_PATH
+            value: "/share/tracker"
+        image: {{account-id}}.dkr.ecr.{{region}}.amazonaws.com/micro_state_tracker
+        ports:
+        - name: state-port
+          containerPort: 3001
+        volumeMounts:
+        - mountPath: "/share/tracker"
+          name: tracker
+      volumes:
+      - name: tracker
+        persistentVolumeClaim:
+          claimName: state-efs-volume

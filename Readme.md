@@ -45,6 +45,17 @@ $ docker tag micro_db_countries:latest <ecr>.amazonaws.com/micro_db_countries:la
 $ docker push <ecr>.amazonaws.com/micro_db_countries:latest
 ```
 
+For micro_state_tracker:
+
+```
+$ aws ecr get-login --region <region>
+$ docker login -u AWS -p eyJwY.....zonaws.com
+$ cd micro-db-countries/
+$ docker build -t micro_state_tracker .
+$ docker tag micro_state_tracker:latest <ecr>.amazonaws.com/micro_state_tracker:latest
+$ docker push <ecr>.amazonaws.com/micro_state_tracker:latest
+```
+
 Variables :
 
 * Replace the **{{account-id}}**
@@ -56,6 +67,8 @@ Running the build.sh to generate the yml files :
 ```
 $ ./build.sh 71727277 us-west-2 ehAi82...9= a27b2d....8db
 ```
+
+Using the kubectl to deploy the application :
 
 ```
 # creating the base64 for the aws-ecr-credentials.yml
@@ -76,6 +89,10 @@ $ kubectl create -f kubernetes/countries-deployment.yml
     deployment "countries-deployment" created
 # launch a service
 $ kubectl create -f kubernetes/countries-service.yml
+
+# working with volumes
+$ kubectl create -f kubernetes/countries-volume-efs.yml
+
 ```
 
 Testing the public api via ELB:

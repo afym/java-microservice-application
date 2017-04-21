@@ -14,6 +14,17 @@ services:
       - repository
     ports:
       - 3000:4567
+  state:
+    image: micro_state_tracker
+    build:
+      context: micro-state-tracker/
+    container_name: minion_state_tracker
+    volumes:
+      - /tmp:/share/tracker
+    environment:
+      CLUSTER_VOLUME_PATH: /share/tracker
+    ports:
+      - 3001:4567
   repository:
     image: micro_db_countries
     build:
