@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: scaling-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: scaling-application
+    spec:
+      containers:
+      - name: scaling
+        image: gcr.io/google_containers/hpa-example
+        ports:
+        - name: scaling-port
+          containerPort: 80
+        resources:
+          requests:
+            cpu: 200m

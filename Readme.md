@@ -56,6 +56,17 @@ $ docker tag micro_state_tracker:latest <ecr>.amazonaws.com/micro_state_tracker:
 $ docker push <ecr>.amazonaws.com/micro_state_tracker:latest
 ```
 
+For micro_stress_cpu:
+
+```
+$ aws ecr get-login --region <region>
+$ docker login -u AWS -p eyJwY.....zonaws.com
+$ cd micro-db-countries/
+$ docker build -t micro_stress_cpu .
+$ docker tag micro_stress_cpu:latest <ecr>.amazonaws.com/micro_stress_cpu:latest
+$ docker push <ecr>.amazonaws.com/micro_stress_cpu:latest
+```
+
 Variables :
 
 * Replace the **{{account-id}}**
@@ -109,5 +120,14 @@ $ curl http://<your-elb>.us-west-2.elb.amazonaws.com/v1/countries/1/populations
 Replace the **{{elb}} and {{region}}** (manually in the operations/jmeter.test/micro-api-country.jmx)
 
 ```
-jmeter -n -t operations/jmeter.test/micro-api-country.jmx
+# jmeter for micro api countries
+$ jmeter -n -t operations/jmeter.test/micro-api-country.jmx
+# stress test to autoscaling
+$ jmeter -n -t operations/jmeter.test/stress-test.jmx  \
+-Jusers=<users> \
+-Jperiod=<period> \
+-Jcount=<count> \
+-Jelb=<elb> \
+-Jcpu=<cpu> \
+-Jtimeout=<timeout>
 ```

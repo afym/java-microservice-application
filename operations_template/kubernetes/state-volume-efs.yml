@@ -4,9 +4,11 @@ metadata:
   name: state-efs-volume
 spec:
   capacity:
-    storage: 100Gi
+    storage: 100Gi 
   accessModes:
-    - ReadWriteMany
+    - ReadWriteMany 
+  persistentVolumeReclaimPolicy: Retain 
   nfs:
+    path: /data
     server: {{efs-dns}}
-    path: "/share"
+    readOnly: false

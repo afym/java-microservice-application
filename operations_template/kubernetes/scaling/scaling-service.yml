@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scaling-service
+spec:
+  ports:
+  - port: 80
+    targetPort: scaling-port
+    protocol: TCP
+  selector:
+    app: scaling-application
+  type: LoadBalancer

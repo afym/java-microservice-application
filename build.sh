@@ -20,6 +20,10 @@ sed -i -e "s@{{region}}@${REGION}@g" "kubernetes/state-deployment.yml"
 
 # efs
 sed -i -e "s@{{efs-dns}}@${EFS_DNS}@g" "kubernetes/state-volume-efs.yml"
+sed -i -e "s@{{account-id}}@${ACCOUNT_ID}@g" "kubernetes/state-deployment.yml"
+sed -i -e "s@{{region}}@${REGION}@g" "kubernetes/state-deployment.yml"
+sed -i -e "s@{{account-id}}@${ACCOUNT_ID}@g" "kubernetes/stress-deployment.yml"
+sed -i -e "s@{{region}}@${REGION}@g" "kubernetes/stress-deployment.yml"
 
 # docker auth
 sed -i -e "s@{{docker-auth-base64}}@${DOCKER_AUTH}@g" "kubernetes/aws-ecr-credentials.yml"

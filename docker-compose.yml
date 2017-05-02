@@ -25,6 +25,13 @@ services:
       CLUSTER_VOLUME_PATH: /share/tracker
     ports:
       - 3001:4567
+  stress:
+    image: micro_stress_cpu
+    build:
+      context: micro-stress-cpu/
+    container_name: micro_stress_cpu
+    ports:
+      - 3002:4567
   repository:
     image: micro_db_countries
     build:

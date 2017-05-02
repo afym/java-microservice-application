@@ -14,15 +14,15 @@ spec:
       - name: state
         env:
           - name: CLUSTER_VOLUME_PATH
-            value: "/share/tracker"
+            value: /data/tracker
         image: {{account-id}}.dkr.ecr.{{region}}.amazonaws.com/micro_state_tracker
         ports:
-        - name: state-port
-          containerPort: 3001
+          - name: state-port
+            containerPort: 4567
         volumeMounts:
-        - mountPath: "/share/tracker"
-          name: tracker
+          - name: data-tracker
+            mountPath: /data/tracker
       volumes:
-      - name: tracker
+      - name: data-tracker
         persistentVolumeClaim:
-          claimName: state-efs-volume
+          claimName: state-efs-volume-claim

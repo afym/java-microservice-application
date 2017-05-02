@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: stress-deployment
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: stress-application
+        version: v1
+    spec:
+      containers:
+      - name: stress
+        image: {{account-id}}.dkr.ecr.{{region}}.amazonaws.com/micro_stress_cpu
+        ports:
+          - name: state-port
+            containerPort: 4567
