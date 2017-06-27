@@ -50,7 +50,7 @@ For micro_state_tracker:
 ```
 $ aws ecr get-login --region <region>
 $ docker login -u AWS -p eyJwY.....zonaws.com
-$ cd micro-db-countries/
+$ cd micro-state-tracker/
 $ docker build -t micro_state_tracker .
 $ docker tag micro_state_tracker:latest <ecr>.amazonaws.com/micro_state_tracker:latest
 $ docker push <ecr>.amazonaws.com/micro_state_tracker:latest

@@ -17,13 +17,19 @@ docker run --name micro_state_tracker -p 3001:4567 -d micro_state_tracker
 
 ### Test the functions
 
-* curl /
-* curl -X POST \
-    /v1/track/write \
-    -H 'cache-control: no-cache' \
-    -H 'content-type: application/x-www-form-urlencoded' \
-    -d 'base64keyFile=L2t1YmVybmV0ZXMudHh0&base64contentFile=dGhpcyBpcyBteSBmaXJzdCB0cmFjaw%3D%3D'
-* curl /v1/track/read/:base64KeyFile
+
+```
+
+```
+
+```
+curl -X POST \
+  http://state.afym.com//v1/track/write \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -H 'postman-token: b4f3034a-b2ce-2d86-a8a9-22115e2c6f12' \
+  -d 'base64keyFile=amF2YS50eHQ%3D&base64contentFile=c29tZSBsYW5ndWFnZQ%3D%3D'
+```
 
 #### IntelliJ tip to compile
 

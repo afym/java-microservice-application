@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: state-deployment
 spec:
-  replicas: 5
+  replicas: 4
   template:
     metadata:
       labels:
@@ -17,7 +17,7 @@ spec:
         env:
           - name: CLUSTER_VOLUME_PATH
             value: /data/tracker
-        image: {{account-id}}.dkr.ecr.{{region}}.amazonaws.com/micro_state_tracker
+        image: ACCOUNTID.dkr.ecr.REGION.amazonaws.com/micro_state_tracker
         ports:
           - name: state-port
             containerPort: 4567
@@ -26,5 +26,6 @@ spec:
             mountPath: /data/tracker
       volumes:
       - name: data-tracker
-        persistentVolumeClaim:
-          claimName: state-efs-volume-claim
+        hostPath:
+          # some path in node
+          path: /home/ubuntu/efs/data/tracker
